@@ -44,9 +44,9 @@ mkdir -p /opt/awx-projects
 sed -i -E "s|^#([[:space:]]?)project_data_dir=/var/lib/awx/projects|project_data_dir=/opt/awx-projects|g" installer/inventory
 
 openssl rand -base64 10
-ed8tTyhLY6HfLA==
+ed8tTyhLY6HfLAxy
 
-sed -i 's/^admin_password=.*/admin_password=ed8tTyhLY6HfLA==/g' installer/inventory
+sed -i 's/^admin_password=.*/admin_password=ed8tTyhLY6HfLAxy/g' installer/inventory
 
 openssl rand -base64 30
 AmySdn4MTc1Z15rxHiBitP52n2M1UJmBMQjgH09x
