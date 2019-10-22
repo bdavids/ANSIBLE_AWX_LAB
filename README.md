@@ -1,4 +1,4 @@
-# Instalalation of AWX
+# Installation of AWX
 
 ## Linux version
 
