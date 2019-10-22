@@ -1,6 +1,6 @@
 # Instalalation of AWX
 
-## Check linux version
+## Linux version
 
 rpm -q centos-release
 
