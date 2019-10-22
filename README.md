@@ -1,7 +1,12 @@
 # Instalalation of AWX
 
+## Check linux version
+
 rpm -q centos-release
+
 centos-release-7-7.1908.0.el7.centos.x86_64
+
+## Install packages
 
 systemctl stop firewalld; systemctl disable firewalld
 
@@ -18,7 +23,52 @@ systemctl enable docker
 
 pip install docker-compose
 
+## Install AWX
 
+git clone --depth 50 https://github.com/ansible/awx.git
+
+git clone --depth 50 https://github.com/ansible/awx-logos.git
+
+cd awx/
+
+sed -i "s|^dockerhub_base=ansible|#dockerhub_base=ansible|g" installer/inventory
+
+sed -i -E "s|^#([[:space:]]?)awx_official=false|awx_official=true|g" installer/inventory
+
+mkdir -p /opt/awx-psql-data
+
+sed -i "s|^postgres_data_dir.*|postgres_data_dir=/opt/awx-psql-data|g" installer/inventory
+
+mkdir -p /opt/awx-projects
+
+sed -i -E "s|^#([[:space:]]?)project_data_dir=/var/lib/awx/projects|project_data_dir=/opt/awx-projects|g" installer/inventory
+
+openssl rand -base64 10
+ed8tTyhLY6HfLA==
+
+sed -i 's/^admin_password=.*/admin_password=ed8tTyhLY6HfLA==/g' installer/inventory
+
+openssl rand -base64 30
+AmySdn4MTc1Z15rxHiBitP52n2M1UJmBMQjgH09x
+
+sed -i 's|secret_key=.*|secret_key=AmySdn4MTc1Z15rxHiBitP52n2M1UJmBMQjgH09x|g' installer/inventory
+
+mkdir -p /opt/awx-ssl/
+
+openssl req -subj '/CN=ansible-lab.sinog.si/O=SINOG/C=SI' \
+	-new -newkey rsa:2048 \
+	-sha256 -days 1365 \
+	-nodes -x509 \
+	-keyout /opt/awx-ssl/awx.key \
+	-out /opt/awx-ssl/awx.crt
+
+cat /opt/awx-ssl/awx.key /opt/awx-ssl/awx.crt > /opt/awx-ssl/awxweb.pem
+
+sed -i -E "s|^#([[:space:]]?)ssl_certificate=|ssl_certificate=/opt/awx-ssl/awxweb.pem|g" installer/inventory
+
+grep -v '^#' installer/inventory | grep -v '^$'
+
+ansible-playbook -i installer/inventory installer/install.yml
 
 # Links
 
