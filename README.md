@@ -1,5 +1,24 @@
 # Instalalation of AWX
 
+rpm -q centos-release
+centos-release-7-7.1908.0.el7.centos.x86_64
+
+systemctl stop firewalld; systemctl disable firewalld
+
+yum -y install epel-release
+
+yum -y install git gcc gcc-c++ lvm2 bzip2 gettext nodejs device-mapper-persistent-data python-pip yum-utils ansible vim yum net-tools
+
+yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+yum install -y docker-ce
+
+systemctl start docker
+systemctl enable docker
+
+pip install docker-compose
+
+
 
 # Links
 
