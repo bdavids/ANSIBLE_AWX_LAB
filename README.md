@@ -25,9 +25,9 @@ pip install docker-compose
 
 ## Install AWX
 
-git clone --depth 50 https://github.com/ansible/awx.git
+git clone https://github.com/ansible/awx.git
 
-git clone --depth 50 https://github.com/ansible/awx-logos.git
+git clone https://github.com/ansible/awx-logos.git
 
 cd awx/
 
