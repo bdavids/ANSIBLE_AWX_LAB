@@ -72,6 +72,8 @@ ansible-playbook -i installer/inventory installer/install.yml
 
 # Links
 
+  https://netapp.io/2020/01/07/getting-started-using-tower-with-awx/
+
   http://yallalabs.com/devops/how-to-install-ansible-awx-without-docker-centos-7-rhel-7/
 
   https://medium.com/swlh/ansible-awx-installation-5861b115455a
